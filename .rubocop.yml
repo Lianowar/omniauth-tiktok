@@ -1,0 +1,25 @@
+inherit_gem:
+  rubocop-github:
+    - config/default_edge.yml
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - '.git/**/*'
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+Style/Documentation:
+  Enabled: false
+GitHub/RailsControllerRenderActionSymbol:
+  Enabled: false
+GitHub/RailsControllerRenderPathsExist:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
