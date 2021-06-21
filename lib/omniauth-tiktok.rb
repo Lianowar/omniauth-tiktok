@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "tiktok/version"
+require 'omniauth-tiktok/version'
+require 'omniauth/strategies/tiktok'
 
 module Omniauth
   module Tiktok
