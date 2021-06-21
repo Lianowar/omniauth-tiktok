@@ -1,38 +1,62 @@
-# Omniauth::Tiktok
+Tiktok OAuth2 Strategy for OmniAuth.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/omniauth/tiktok`. To experiment with that code, run `bin/console` for an interactive prompt.
+Supports OAuth 2.0 server-side flow with Tiktok API. 
+Read the Tiktok docs for more details: https://developers.tiktok.com/doc/login-kit-web
 
-TODO: Delete this and the text above, and describe your gem
+####Tiktok access_token valid only for 24 hours!
 
-## Installation
+## Installing
 
-Add this line to your application's Gemfile:
+Add to your `Gemfile`:
 
 ```ruby
 gem 'omniauth-tiktok'
 ```
 
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install omniauth-tiktok
+Then `bundle install`.
 
 ## Usage
 
-TODO: Write usage instructions here
+`OmniAuth::Strategies::Tiktok` is simply a Rack middleware. Read the OmniAuth docs for detailed instructions: https://github.com/omniauth/omniauth.
+
+Here's a quick example, adding the middleware to a Rails app in `config/initializers/omniauth.rb`:
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :tiktok, ENV['TIKTOK_CLIENT_ID'], ENV['TIKTOK_CLIENT_SECRET']
+end
+```
+
+### Custom Callback URL/Path
+
+You can set a custom `callback_url` or `callback_path` option to override the default value.
+
+## Auth Hash
+
+Here's an example Auth Hash available in `request.env['omniauth.auth']`:
+
+```
+{
+  provider: 'tiktok',
+  uid: '1234567',
+  info: {
+    display_name: 'ABCDEF'
+  },
+  credentials: {
+    token: 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
+    expires_at: 1321747205, # when the access token expires (it always will)
+    expires: true, # this will always be true
+    refresh_token: 'ABCDEF', # it will be valid for 365 days
+    refresh_token_expires_at: 1111111 # timestamp
+  }
+}
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/omniauth-tiktok. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/omniauth-tiktok/blob/master/CODE_OF_CONDUCT.md).
+```
+gem bump --file=lib/omniauth-tiktok/version.rb --push --tag --release --pretend
+```
 
 ## License
 
@@ -40,4 +64,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Omniauth::Tiktok project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/omniauth-tiktok/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the OmniAuth::Tiktok project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/Lianowar/omniauth-tiktok/blob/master/CODE_OF_CONDUCT.md).
