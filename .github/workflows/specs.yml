@@ -21,14 +21,6 @@ jobs:
           ruby-version: 3.0
           bundler-cache: true
 
-      - name: Cache Ruby Gems
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-
       - name: Bundle Install
         run: |
           bundle config path vendor/bundle
