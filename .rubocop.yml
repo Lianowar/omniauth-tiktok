@@ -5,6 +5,7 @@ AllCops:
   Exclude:
     - 'bin/**/*'
     - '.git/**/*'
+    - 'vendor/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
