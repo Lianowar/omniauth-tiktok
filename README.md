@@ -1,4 +1,4 @@
-Tiktok OAuth2 Strategy for OmniAuth.
+# Tiktok OAuth2 Strategy for OmniAuth.
 
 Supports OAuth 2.0 server-side flow with Tiktok API. 
 Read the Tiktok docs for more details: https://developers.tiktok.com/doc/login-kit-web
